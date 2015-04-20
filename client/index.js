@@ -6,6 +6,35 @@ angular.module('alpha', [])
   console.info('running the run function');
   $rootScope.z = 12;
 }])
+
+.controller('listfun', ['$scope', function($scope) {
+  console.info('listfun controller initialized');
+  $scope.compute = function() {
+    console.info('compute');
+    $scope.numbers = $scope.numString.split(',').map(function(x){ return x*1;});
+    computeStats();
+  }
+
+  $scope.removeNumber = function() {
+    $scope.numbers.splice(index, 1);
+    computeStats();
+  };
+
+  $scope.addNumber = function() {
+    $scope.numbers.push($scope.number);
+    computeStats()
+  }
+
+  $scope.getBg = function(num) {
+    return num %2 ? 'yellow': 'green';
+  }
+
+  function computeStats() {
+    $scope.sum = $scope.numbers.reduce(function(x,y){return x + y;});
+    $scope.product = $scope.numbers.reduce(function(x,y){return x * y;});
+  }
+}])
+
 .controller('rainbow', ['$scope', function($scope) {
   console.info('rainbow controller initialized');
   $scope.colors = ['blue', 'green', 'yellow'];

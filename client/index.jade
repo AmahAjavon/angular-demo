@@ -6,14 +6,30 @@ html(lang='en' ng-app='alpha')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title Angular Demo
 
-    link(rel='stylesheet', href='/vendor/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cyborg/bootstrap.min.css')
     link(rel='stylesheet', href='/vendor/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet', href=isProd ? '/index.min.css' : '/index.css')
     link(rel='shortcut icon', href='/favicon.ico')
   body
     h1#title Angular Demo
-
+    
     .container-fluid
+      .row(ng-controller='listfun')
+        .col-xs-12
+          h1 List Fun
+          input(type='text', ng-model='numString')
+          button(ng-click='compute()') Compute
+          input(type='number', ng-model='number')
+          button(ng-click='addNumber()') Add Number
+          .row
+            .col-xs-6
+              h3 Numbers
+              #numbers
+                .number(ng-repeat='num in numbers track by $index', ng-click='removeNumber($index)', style='background-color:{{getBg(num)}};') {{num}}
+            .col-xs-6
+              h3 Stats
+              p Sum: {{sum}}
+              p Product: {{product}}
       .row(ng-controller='rainbow')
         .col-xs-12
           h1 Rainbow
@@ -35,16 +51,18 @@ html(lang='en' ng-app='alpha')
 
       .row(ng-controller='beta')
         .col-xs-12
+          h3 BETA
           p The value of x is {{x}}
           p The value of y is {{y}}
           p The sum of x and y is {{x + y}}
       .row(ng-controller='gamma')
         .col-xs-6
-          h1 GAMMA
+          h3 GAMMA 1
           p The value of x is {{x}}
         .col-xs-6
-          h1 GAMMA 2
-          p The value of x is {{y}}
+          h3 GAMMA 2
+          p the value of y is {{y}}
+          p the product of x, y and z is {{x*y*z}}
 
 
 
